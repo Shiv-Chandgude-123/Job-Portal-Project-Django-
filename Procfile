@@ -1,0 +1,1 @@
+web: gunicorn JOB PORTAL PROJECT(DJANGO).wsgi:application
