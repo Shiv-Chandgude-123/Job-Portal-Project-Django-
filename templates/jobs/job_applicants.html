@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Applicants - {{ job.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Applicants for "{{ job.title }}"</h2>
+
+  {% if applications %}
+    <div class="row g-3">
+      {% for app in applications %}
+        <div class="col-md-6">
+          <div class="card shadow-sm p-3">
+            <h5 class="card-title">{{ app.candidate.username }}</h5>
+            <p class="card-text"><strong>Email:</strong> {{ app.candidate.email }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ app.status }}</p>
+            
+            <!-- Accept/Reject buttons -->
+            {% if app.status == "Pending" %}
+            <a href="{% url 'update_application_status' app.id 'Accepted' %}" class="btn btn-success btn-sm me-2">Accept</a>
+            <a href="{% url 'update_application_status' app.id 'Rejected' %}" class="btn btn-danger btn-sm">Reject</a>
+            {% endif %}
+
+            <!-- Resume download -->
+            {% if app.resume %}
+            <a href="{{ app.resume.url }}" class="btn btn-secondary btn-sm mt-2" download>Download Resume</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No one has applied yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

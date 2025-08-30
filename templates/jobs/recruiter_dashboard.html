@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Recruiter Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">My Posted Jobs</h2>
+
+  {% if jobs %}
+    <div class="row g-3">
+      {% for job in jobs %}
+        <div class="col-md-6">
+          <div class="card shadow-sm p-3">
+            <h5 class="card-title">{{ job.title }}</h5>
+            <p class="card-text">Company: {{ job.company }}</p>
+            <p class="card-text">Location: {{ job.location }}</p>
+            <p class="card-text">Applicants: {{ job.application_set.count }}</p>
+
+            <a href="{% url 'job_detail' job.id %}" class="btn btn-primary btn-sm">View Job</a>
+            <a href="{% url 'job_applicants' job.id %}" class="btn btn-secondary btn-sm">View Applicants</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>You have not posted any jobs yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

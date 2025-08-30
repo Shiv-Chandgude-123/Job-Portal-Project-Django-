@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4 rounded-4 border-0">
+        <div class="card-body">
+          <!-- Header -->
+          <h2 class="card-title text-center mb-4 text-primary fw-bold">Create Your Account</h2>
+          <p class="text-center text-muted mb-4">Join our job portal and start applying or posting jobs!</p>
+
+          <!-- Form -->
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Sign Up</button>
+          </form>
+
+          <!-- Footer link -->
+          <p class="text-center text-muted mt-3">
+            Already have an account? <a href="{% url 'login' %}" class="text-decoration-none text-primary fw-semibold">Login here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
